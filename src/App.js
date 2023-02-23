@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import './index.css';
+import DocumentEditor from './components/DocumentEditor';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="min-h-screen bg-gray-100">
+      <header className="py-4 bg-white shadow">
+        <div className="container mx-auto px-4">
+          <h1 className="text-xl font-semibold text-gray-900">
+            Docs
+          </h1>
+        </div>
       </header>
+      <main className="container mx-auto mt-8 px-4">
+        <DocumentEditor />
+      </main>
     </div>
   );
 }
