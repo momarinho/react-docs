@@ -37,7 +37,7 @@ const DocumentEditor = ({ title }) => {
       <div className="flex-grow px-4">
         <ReactQuill
           ref={quillRef}
-          className="h-full"
+          className="h-screen"
           value={document}
           onChange={setDocument}
           placeholder="Start typing here..."

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Modal = ({ handleAdd }) => {
+const Modal = ({ handleAdd, handleClose }) => {
   const [title, setTitle] = useState('');
 
   const handleTitleChange = (event) => {
@@ -34,13 +34,16 @@ const Modal = ({ handleAdd }) => {
             />
           </label>
           <div className="flex justify-end">
-            <button type="submit" className="btn btn-primary mr-2">
+            <button
+              type="submit"
+              className="btn btn-primary mr-2 text-green-600 hover:text-green-700"
+            >
               Save
             </button>
             <button
               type="button"
-              className="btn btn-secondary"
-              onClick={() => setTitle('')}
+              className="btn btn-secondary text-red-600 hover:text-red-700"
+              onClick={handleClose}
             >
               Cancel
             </button>

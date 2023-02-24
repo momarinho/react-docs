@@ -27,6 +27,10 @@ const Docs = () => {
     setDocuments(updatedDocs);
   };
 
+  const handleCloseModal = () => {
+    setShowAddModal(false);
+  };
+
   return (
     <div className="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <div className="flex justify-between items-center mb-8">
@@ -37,7 +41,9 @@ const Docs = () => {
         >
           Add Document
         </button>
-        {showAddModal && <Modal handleAdd={handleAdd} />}
+        {showAddModal && (
+          <Modal handleAdd={handleAdd} handleClose={handleCloseModal} />
+        )}
       </div>
 
       <DocumentList documents={documents} handleDelete={handleDelete} />
