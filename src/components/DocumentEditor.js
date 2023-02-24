@@ -2,18 +2,17 @@ import { useState, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-const DocumentEditor = () => {
+const DocumentEditor = ({ title }) => {
   const [document, setDocument] = useState('');
+  const quillRef = useRef();
 
   const handleSave = () => {
-    console.log('Document saved:', document);
+    console.log(`Document "${title}" saved:`, document);
   };
 
   const handleDiscard = () => {
     setDocument('');
   };
-
-  const quillRef = useRef();
 
   return (
     <div className="flex flex-col h-screen">
@@ -32,6 +31,7 @@ const DocumentEditor = () => {
             Discard
           </button>
         </div>
+        <h1 className="text-2xl">{title}</h1>
       </div>
 
       <div className="flex-grow px-4">
