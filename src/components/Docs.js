@@ -1,35 +1,59 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DocumentList from './DocumentList';
 import Modal from './Modal';
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  doc,
+  deleteDoc,
+} from 'firebase/firestore';
 
-const Docs = () => {
-  const [documents, setDocuments] = useState([]);
+const Docs = ({ db }) => {
+  const [docsData, setDocsData] = useState([]);
   const [showAddModal, setShowAddModal] = useState(false);
 
-  const generateId = () => {
-    const timestamp = Date.now().toString(36);
-    const randomNumber = Math.random().toString(36).substring(2, 8);
-    return timestamp + randomNumber;
-  };
-
   const handleAdd = (title) => {
-    const newDocument = {
-      id: generateId(),
+    const collectionRef = collection(db, 'docsData');
+    addDoc(collectionRef, {
       title: title,
       content: '',
-    };
-    setDocuments([...documents, newDocument]);
-    setShowAddModal(false);
+    })
+      .then(() => {
+        // alert('Data Added');
+        setShowAddModal(false);
+      })
+      .catch(() => {
+        alert('Cannot add data');
+      });
   };
 
   const handleDelete = (id) => {
-    const updatedDocs = documents.filter((document) => document.id !== id);
-    setDocuments(updatedDocs);
+    const docRef = doc(db, 'docsData', id);
+    deleteDoc(docRef)
+      .then(() => {
+        console.log('Document successfully deleted!');
+      })
+      .catch((error) => {
+        console.error('Error removing document: ', error);
+      });
   };
 
   const handleCloseModal = () => {
     setShowAddModal(false);
   };
+
+  useEffect(() => {
+    const collectionRef = collection(db, 'docsData');
+    const unsubscribe = onSnapshot(collectionRef, (querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push({ ...doc.data(), id: doc.id });
+      });
+      setDocsData(data);
+    });
+    return () => unsubscribe();
+  });
 
   return (
     <div className="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
@@ -46,7 +70,7 @@ const Docs = () => {
         )}
       </div>
 
-      <DocumentList documents={documents} handleDelete={handleDelete} />
+      <DocumentList documents={docsData} handleDelete={handleDelete} />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import './index.css';
 import DocumentEditor from './components/DocumentEditor';
 import Docs from './components/Docs';
+import { app, db } from './firebase/firebase';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -13,8 +14,11 @@ function App() {
       </header>
       <main className="container mx-auto mt-8 px-4">
         <Routes>
-          <Route exact path="/" element={<Docs />}></Route>
-          <Route path="/editor/:id" element={<DocumentEditor />}></Route>
+          <Route exact path="/" element={<Docs db={db} />}></Route>
+          <Route
+            path="/editor/:id"
+            element={<DocumentEditor db={db} />}
+          ></Route>
         </Routes>
       </main>
     </div>
