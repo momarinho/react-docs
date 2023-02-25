@@ -5,8 +5,12 @@ import { collection, doc, updateDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import { toast, ToastContainer } from 'react-toastify';
 
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 import 'react-quill/dist/quill.snow.css';
 import 'react-toastify/dist/ReactToastify.css';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const DocumentEditor = ({ title }) => {
   const [document, setDocument] = useState('');
@@ -41,6 +45,14 @@ const DocumentEditor = ({ title }) => {
     navigate('/', { replace: true });
   };
 
+  const downloadPdf = () => {
+    const strippedDocument = document.replace(/(<([^>]+)>)/gi, '');
+    const docDefinition = {
+      content: strippedDocument,
+    };
+    pdfMake.createPdf(docDefinition).download(`${title}.pdf`);
+  };
+
   useEffect(() => {
     const documentRef = doc(collectionRef, id);
     const unsubscribe = onSnapshot(documentRef, (doc) => {
@@ -52,8 +64,7 @@ const DocumentEditor = ({ title }) => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* <h1 className="text-2xl font-semibold">{title}</h1> */}
-      <div className="flex justify-end items-center mb-4 px-4 pt-2">
+      <div className="flex justify-around items-center mb-4 px-4 pt-2">
         <div className="space-x-4">
           <button
             className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
@@ -69,7 +80,12 @@ const DocumentEditor = ({ title }) => {
           >
             Discard
           </button>
-
+          <button
+            className="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded"
+            onClick={downloadPdf}
+          >
+            Download PDF
+          </button>
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
             onClick={goBack}
@@ -102,4 +118,5 @@ const DocumentEditor = ({ title }) => {
     </div>
   );
 };
+
 export default DocumentEditor;

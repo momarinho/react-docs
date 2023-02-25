@@ -9,7 +9,7 @@ export default function WelcomeScreen() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center h-screen">
+    <main className="flex flex-col items-center justify-center h-96">
       <h2 className="text-2xl font-semibold mb-4">Welcome!</h2>
       <p className="text-gray-500 text-center mb-8">
         Sign in with Google to start

@@ -38,7 +38,7 @@ Tailwind CSS
 # Future Enhancements
 Implement the ability to share documents with other users
 
-Add support for multiple document formats, such as PDF and Microsoft Word
-
 Change the style of the project
+
+Pagination
 ...

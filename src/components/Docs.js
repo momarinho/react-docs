@@ -60,7 +60,7 @@ const Docs = ({ db }) => {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold">Documents</h1>
         <button
-          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
+          className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded"
           onClick={() => setShowAddModal(true)}
         >
           Add Document
