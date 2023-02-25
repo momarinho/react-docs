@@ -20,7 +20,7 @@ export default function Header() {
             className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
             type="button"
           >
-            Sign Out
+            Sign out
           </button>
         )}
       </div>

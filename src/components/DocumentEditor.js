@@ -7,7 +7,6 @@ const DocumentEditor = ({ title }) => {
   const [document, setDocument] = useState('');
 
   const quillRef = useRef();
-
   const navigate = useNavigate();
 
   const handleSave = () => {
@@ -52,10 +51,10 @@ const DocumentEditor = ({ title }) => {
         </div>
       </div>
 
-      <div className="flex-grow px-4">
+      <div className="flex-grow bg-white">
         <ReactQuill
           ref={quillRef}
-          className="h-auto"
+          className="h-screen border-0"
           value={document}
           onChange={setDocument}
           placeholder="Start typing here..."
