@@ -18,7 +18,7 @@ const Modal = ({ handleAdd, handleClose }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white rounded-lg p-4">
+      <div className="bg-white rounded-lg p-8 shadow-lg">
         <h2 className="text-lg font-bold mb-2">Add Document</h2>
         <form onSubmit={handleSubmit}>
           <label className="block mb-2" htmlFor="title">

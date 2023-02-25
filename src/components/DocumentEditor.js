@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const DocumentEditor = ({ title }) => {
   const [document, setDocument] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const quillRef = useRef();
   const navigate = useNavigate();
@@ -29,8 +30,11 @@ const DocumentEditor = ({ title }) => {
         toast.error('Error saving document.');
       });
   };
+
   const handleDiscard = () => {
-    setDocument('');
+    if (window.confirm('Are you sure you want to discard your changes?')) {
+      setDocument('');
+    }
   };
 
   const goBack = () => {
@@ -41,36 +45,40 @@ const DocumentEditor = ({ title }) => {
     const documentRef = doc(collectionRef, id);
     const unsubscribe = onSnapshot(documentRef, (doc) => {
       setDocument(doc.data().docsDesc);
+      setIsLoading(false);
     });
     return unsubscribe;
   }, [id]);
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex justify-evenly items-center mb-4 px-4">
-        <div>
+      <div className="fixed top-0 left-0 right-0 bg-white z-10 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 py-2">
+          <h1 className="text-2xl font-semibold">{title}</h1>
+        </div>
+      </div>
+      <div className="flex justify-end items-center mb-4 px-4 pt-2">
+        <div className="space-x-4">
           <button
-            className="mr-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
-            onClick={handleSave}
-          >
-            Save
-          </button>
-          <button
-            className="mr-2 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
+            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
             onClick={handleDiscard}
           >
             Discard
           </button>
           <button
-            onClick={goBack}
+            className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
+            onClick={handleSave}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Saving...' : 'Save'}
+          </button>
+          <button
             className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
+            onClick={goBack}
           >
             Back
           </button>
         </div>
-        {/* <div>
-          <h1 className="text-2xl">{title}</h1>
-        </div> */}
       </div>
 
       <ToastContainer />
@@ -82,10 +90,18 @@ const DocumentEditor = ({ title }) => {
           value={document}
           onChange={setDocument}
           placeholder="Start typing here..."
+          modules={{
+            toolbar: [
+              [{ header: [1, 2, 3, 4, 5, 6, false] }],
+              [{ font: [] }],
+              [{ size: [] }],
+              ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+              [{ color: [] }, { background: [] }],
+            ],
+          }}
         />
       </div>
     </div>
   );
 };
-
 export default DocumentEditor;

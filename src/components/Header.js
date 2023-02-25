@@ -12,7 +12,7 @@ export default function Header() {
   return (
     <header className="py-4 bg-white shadow-lg">
       <div className="container mx-auto px-4 flex justify-between">
-        <h1 className="text-xl font-semibold text-gray-900">Docs Clone</h1>
+        <h1 className="text-xl font-semibold text-gray-900">Docs</h1>
         {user && (
           <button
             onClick={signOut}

@@ -12,7 +12,6 @@ import {
 const Docs = ({ db }) => {
   const [docsData, setDocsData] = useState([]);
   const [showAddModal, setShowAddModal] = useState(false);
-  const [currentTitle, setCurrentTitle] = useState('');
 
   const handleAdd = (title) => {
     const collectionRef = collection(db, 'docsData');
@@ -22,7 +21,6 @@ const Docs = ({ db }) => {
     })
       .then(() => {
         // alert('Data Added');
-        setCurrentTitle(title)
         setShowAddModal(false);
       })
       .catch(() => {
@@ -71,7 +69,6 @@ const Docs = ({ db }) => {
           <Modal
             handleAdd={handleAdd}
             handleClose={handleCloseModal}
-            setCurrentTitle={setCurrentTitle}
           />
         )}
       </div>
