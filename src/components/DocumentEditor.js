@@ -52,19 +52,9 @@ const DocumentEditor = ({ title }) => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="fixed top-0 left-0 right-0 bg-white z-10 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 py-2">
-          <h1 className="text-2xl font-semibold">{title}</h1>
-        </div>
-      </div>
+      {/* <h1 className="text-2xl font-semibold">{title}</h1> */}
       <div className="flex justify-end items-center mb-4 px-4 pt-2">
         <div className="space-x-4">
-          <button
-            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
-            onClick={handleDiscard}
-          >
-            Discard
-          </button>
           <button
             className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
             onClick={handleSave}
@@ -72,6 +62,14 @@ const DocumentEditor = ({ title }) => {
           >
             {isLoading ? 'Saving...' : 'Save'}
           </button>
+
+          <button
+            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
+            onClick={handleDiscard}
+          >
+            Discard
+          </button>
+
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
             onClick={goBack}
