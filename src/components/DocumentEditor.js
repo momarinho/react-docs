@@ -1,9 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { collection, doc, updateDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
+import { toast, ToastContainer } from 'react-toastify';
+
+import 'react-quill/dist/quill.snow.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DocumentEditor = ({ title }) => {
   const [document, setDocument] = useState('');
@@ -13,14 +16,17 @@ const DocumentEditor = ({ title }) => {
   const collectionRef = collection(db, 'docsData');
   const { id } = useParams();
 
-  const handleSave = () => {
+  const handleSave = (event) => {
+    event.preventDefault();
     const documentRef = doc(collectionRef, id);
     updateDoc(documentRef, { docsDesc: document })
       .then(() => {
         console.log(`Document "${title}" saved:`, document);
+        toast.success(`Document "${title}" saved:`);
       })
       .catch((error) => {
         console.error('Error saving document:', error);
+        toast.error('Error saving document.');
       });
   };
   const handleDiscard = () => {
@@ -41,25 +47,20 @@ const DocumentEditor = ({ title }) => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex justify-between items-center mb-4 px-4">
+      <div className="flex justify-evenly items-center mb-4 px-4">
         <div>
           <button
-            className="mr-2 bg-gray-300 hover:bg-gray-400 py-2 px-4 rounded"
+            className="mr-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
             onClick={handleSave}
           >
             Save
           </button>
           <button
-            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
+            className="mr-2 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
             onClick={handleDiscard}
           >
             Discard
           </button>
-        </div>
-        <div>
-          <h1 className="text-2xl">{title}</h1>
-        </div>
-        <div>
           <button
             onClick={goBack}
             className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
@@ -67,7 +68,12 @@ const DocumentEditor = ({ title }) => {
             Back
           </button>
         </div>
+        {/* <div>
+          <h1 className="text-2xl">{title}</h1>
+        </div> */}
       </div>
+
+      <ToastContainer />
 
       <div className="flex-grow bg-white">
         <ReactQuill

@@ -1,6 +1,6 @@
 import Docs from './components/Docs';
 import { app, auth, db } from './firebase/firebase';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import './index.css';
@@ -9,10 +9,6 @@ import WelcomeScreen from './screens/WelcomeScreen';
 import Header from './components/Header';
 
 function App() {
-  const location = useLocation();
-
-  const title = location.pathname.split('/').pop();
-
   const [user] = useAuthState(auth);
 
   return (
@@ -25,10 +21,7 @@ function App() {
           <main className="container mx-auto mt-8 px-4">
             <Routes>
               <Route exact path="/" element={<Docs db={db} />} />
-              <Route
-                path="/editor/:id"
-                element={<DocumentEditor db={db} title={title} />}
-              />
+              <Route path="/editor/:id" element={<DocumentEditor db={db} />} />
             </Routes>
           </main>
         )}

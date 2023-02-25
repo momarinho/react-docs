@@ -12,14 +12,17 @@ import {
 const Docs = ({ db }) => {
   const [docsData, setDocsData] = useState([]);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [currentTitle, setCurrentTitle] = useState('');
 
   const handleAdd = (title) => {
     const collectionRef = collection(db, 'docsData');
     addDoc(collectionRef, {
       title: title,
+      docsDesc: '',
     })
       .then(() => {
         // alert('Data Added');
+        setCurrentTitle(title)
         setShowAddModal(false);
       })
       .catch(() => {
@@ -52,7 +55,7 @@ const Docs = ({ db }) => {
       setDocsData(data);
     });
     return () => unsubscribe();
-  });
+  }, []);
 
   return (
     <div className="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
@@ -65,7 +68,11 @@ const Docs = ({ db }) => {
           Add Document
         </button>
         {showAddModal && (
-          <Modal handleAdd={handleAdd} handleClose={handleCloseModal} />
+          <Modal
+            handleAdd={handleAdd}
+            handleClose={handleCloseModal}
+            setCurrentTitle={setCurrentTitle}
+          />
         )}
       </div>
 

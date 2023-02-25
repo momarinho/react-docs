@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { GoogleAuthProvider, signInWithRedirect } from 'firebase/auth';
 import { auth } from '../firebase/firebase';
 
 export default function Header() {
@@ -17,7 +16,7 @@ export default function Header() {
         {user && (
           <button
             onClick={signOut}
-            className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+            className="text-red-500 rounded hover:text-red-600"
             type="button"
           >
             Sign out
