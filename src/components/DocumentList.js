@@ -16,7 +16,7 @@ const DocumentList = ({ documents, handleDelete }) => {
           </Link>
           <button
             onClick={() => handleDelete(document.id)}
-            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
+            className="bg-orange-700 hover:bg-orange-800 text-white py-2 px-4 rounded"
           >
             Delete
           </button>
