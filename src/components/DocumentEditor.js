@@ -1,18 +1,28 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { collection, doc, updateDoc, onSnapshot } from 'firebase/firestore';
+import { db } from '../firebase/firebase';
 
 const DocumentEditor = ({ title }) => {
   const [document, setDocument] = useState('');
 
   const quillRef = useRef();
   const navigate = useNavigate();
+  const collectionRef = collection(db, 'docsData');
+  const { id } = useParams();
 
   const handleSave = () => {
-    console.log(`Document "${title}" saved:`, document);
+    const documentRef = doc(collectionRef, id);
+    updateDoc(documentRef, { docsDesc: document })
+      .then(() => {
+        console.log(`Document "${title}" saved:`, document);
+      })
+      .catch((error) => {
+        console.error('Error saving document:', error);
+      });
   };
-
   const handleDiscard = () => {
     setDocument('');
   };
@@ -20,6 +30,14 @@ const DocumentEditor = ({ title }) => {
   const goBack = () => {
     navigate('/', { replace: true });
   };
+
+  useEffect(() => {
+    const documentRef = doc(collectionRef, id);
+    const unsubscribe = onSnapshot(documentRef, (doc) => {
+      setDocument(doc.data().docsDesc);
+    });
+    return unsubscribe;
+  }, [id]);
 
   return (
     <div className="flex flex-col min-h-screen">

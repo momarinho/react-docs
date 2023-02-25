@@ -17,7 +17,6 @@ const Docs = ({ db }) => {
     const collectionRef = collection(db, 'docsData');
     addDoc(collectionRef, {
       title: title,
-      content: '',
     })
       .then(() => {
         // alert('Data Added');
