@@ -5,9 +5,8 @@ import Pagination from './Pagination';
 
 const DocumentList = ({ documents, handleDelete }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [documentsPerPage, setDocumentsPerPage] = useState(5);
+  const [documentsPerPage, setDocumentsPerPage] = useState(10);
 
-  // Logic to calculate the index of the first and last document to display
   const indexOfLastDocument = currentPage * documentsPerPage;
   const indexOfFirstDocument = indexOfLastDocument - documentsPerPage;
   const currentDocuments = documents.slice(
@@ -15,14 +14,8 @@ const DocumentList = ({ documents, handleDelete }) => {
     indexOfLastDocument
   );
 
-  // Logic to render pagination buttons
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(documents.length / documentsPerPage); i++) {
-    pageNumbers.push(i);
-  }
-
   return (
-    <div>
+    <div className="container mx-auto py-6 px-4">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {currentDocuments.map((document) => (
           <div

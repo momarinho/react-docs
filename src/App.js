@@ -8,6 +8,7 @@ import DocumentEditor from './components/DocumentEditor';
 import WelcomeScreen from './screens/WelcomeScreen';
 import Header from './components/Header';
 import { useEffect, useState } from 'react';
+import Footer from './components/Footer';
 
 function App() {
   const [user] = useAuthState(auth);
@@ -36,6 +37,7 @@ function App() {
             </Routes>
           </main>
         )}
+        <Footer />
       </div>
     </div>
   );

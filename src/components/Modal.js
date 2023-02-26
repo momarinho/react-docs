@@ -17,15 +17,15 @@ const Modal = ({ handleAdd, handleClose }) => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 bg-gray-900 bg-opacity-90 flex justify-center items-center z-50">
+    <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
       <div className="bg-gray-800 rounded-lg p-8 shadow-lg">
         <h2 className="text-lg font-bold mb-2 text-gray-300">Add Document</h2>
         <form onSubmit={handleSubmit}>
-          <label className="block mb-2" htmlFor="title">
-            <span className="text-gray-300">Title:</span>
+          <label className="block mb-2 text-gray-300" htmlFor="title">
+            Title:
             <input
               type="text"
-              className="form-input mt-1 block w-full rounded-md bg-gray-700 border-gray-700 text-gray-300 focus:border-indigo-500 focus:ring-indigo-500 focus:ring-opacity-50"
+              className="form-input mt-1 block w-full rounded-md bg-gray-700 border-gray-700 text-gray-300 focus:border-green-500 focus:ring-green-500 focus:ring-opacity-50"
               placeholder="Enter a title..."
               id="title"
               value={title}
@@ -33,16 +33,16 @@ const Modal = ({ handleAdd, handleClose }) => {
               required
             />
           </label>
-          <div className="flex justify-between">
+          <div className="flex justify-end">
             <button
               type="submit"
-              className="btn btn-primary mr-2 text-green-500 hover:text-green-400"
+              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-700 text-base font-medium text-white hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
             >
               Save
             </button>
             <button
               type="button"
-              className="btn btn-secondary text-red-500 hover:text-red-400"
+              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-700 text-base font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
               onClick={handleClose}
             >
               Cancel
