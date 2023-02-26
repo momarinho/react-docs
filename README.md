@@ -38,5 +38,4 @@ Tailwind CSS
 # Future Enhancements
 Implement the ability to share documents with other users
 
-Pagination
 ...
