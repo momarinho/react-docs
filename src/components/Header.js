@@ -10,9 +10,9 @@ export default function Header() {
   };
 
   return (
-    <header className="py-4 bg-white shadow-lg">
-      <div className="container mx-auto px-4 flex justify-between">
-        <h1 className="text-xl font-semibold text-gray-900">Docs</h1>
+    <header className="py-4 bg-gray-700">
+      <div className="container mx-auto px-4 flex justify-between items-center">
+        <h1 className="text-2xl font-bold text-white tracking-wider">DOCS</h1>
         {user && (
           <button
             onClick={signOut}

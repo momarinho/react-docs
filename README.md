@@ -38,7 +38,5 @@ Tailwind CSS
 # Future Enhancements
 Implement the ability to share documents with other users
 
-Change the style of the project
-
 Pagination
 ...

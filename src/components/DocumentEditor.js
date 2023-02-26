@@ -97,10 +97,10 @@ const DocumentEditor = ({ title }) => {
 
       <ToastContainer />
 
-      <div className="flex-grow bg-white">
+      <div className="flex-screen bg-white">
         <ReactQuill
           ref={quillRef}
-          className="h-screen border-0"
+          className="h-fit"
           value={document}
           onChange={setDocument}
           placeholder="Start typing here..."
@@ -113,6 +113,7 @@ const DocumentEditor = ({ title }) => {
               [{ color: [] }, { background: [] }],
             ],
           }}
+          style={{ color: 'black' }}
         />
       </div>
     </div>

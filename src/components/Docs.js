@@ -58,18 +58,15 @@ const Docs = ({ db }) => {
   return (
     <div className="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold">Documents</h1>
+        <h1 className="text-2xl font-bold text-gray-300">Documents</h1>
         <button
-          className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded"
+          className="bg-purple-600 hover:bg-purple-700 text-gray-300 py-1 px-2 rounded-md transition duration-300 ease-in-out"
           onClick={() => setShowAddModal(true)}
         >
           Add Document
         </button>
         {showAddModal && (
-          <Modal
-            handleAdd={handleAdd}
-            handleClose={handleCloseModal}
-          />
+          <Modal handleAdd={handleAdd} handleClose={handleCloseModal} />
         )}
       </div>
 

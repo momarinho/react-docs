@@ -7,21 +7,22 @@ import './index.css';
 import DocumentEditor from './components/DocumentEditor';
 import WelcomeScreen from './screens/WelcomeScreen';
 import Header from './components/Header';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   const [user] = useAuthState(auth);
   const [loading, setLoading] = useState(true);
 
-  auth.onAuthStateChanged((user) => {
-    if (user) {
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       setLoading(false);
-    }
-  });
+    });
+    return unsubscribe;
+  }, []);
 
   return (
     <div>
-      <div className="min-h-screen bg-gray-100">
+      <div className="min-h-screen bg-gray-900 text-white">
         <Header />
         {loading ? (
           <div className="mx-auto mt-8 px-4">Loading...</div>
